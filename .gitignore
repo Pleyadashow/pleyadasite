@@ -1,0 +1,10 @@
+# Raw source media (unoptimized originals) — not deployed.
+# Optimized, web-ready copies live in assets/images and assets/video.
+/видео/
+/відгуки/
+/образы и реквизит/
+
+# Editor / tooling
+.claude/
+.DS_Store
+Thumbs.db
