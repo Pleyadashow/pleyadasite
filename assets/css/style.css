@@ -23,7 +23,7 @@
    Reset
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -208,7 +208,7 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(23,20,18,.55) 0%, rgba(23,20,18,.35) 32%, rgba(23,20,18,.72) 100%);
+    linear-gradient(180deg, rgba(23,20,18,.62) 0%, rgba(23,20,18,.45) 28%, rgba(23,20,18,.78) 62%, rgba(23,20,18,.92) 100%);
 }
 .hero-content {
   position: relative;
@@ -222,11 +222,13 @@ h1, h2, h3, h4 {
   text-transform: uppercase;
   color: color-mix(in srgb, var(--dark-text) 80%, var(--accent) 20%);
   margin-bottom: 1.1rem;
+  text-shadow: 0 1px 16px rgba(0,0,0,.5);
 }
 .hero-title {
   font-size: clamp(2.2rem, 6vw, 4.2rem);
   max-width: 16ch;
   color: var(--dark-text);
+  text-shadow: 0 2px 24px rgba(0,0,0,.5);
 }
 .hero-title em {
   font-style: italic;
@@ -244,12 +246,15 @@ h1, h2, h3, h4 {
   padding: 0.45rem 1rem;
   border: 1px solid color-mix(in srgb, var(--dark-text) 35%, transparent);
   border-radius: 999px;
+  background: rgba(23,20,18,.28);
+  backdrop-filter: blur(6px);
 }
 .hero-lede {
   margin-top: 1.75rem;
   max-width: 40ch;
   font-size: 1.05rem;
   color: color-mix(in srgb, var(--dark-text) 88%, transparent);
+  text-shadow: 0 1px 16px rgba(0,0,0,.45);
 }
 .hero-actions {
   margin-top: 2.2rem;
