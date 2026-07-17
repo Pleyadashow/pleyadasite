@@ -420,6 +420,57 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
+   TikTok feed
+   ========================================================================== */
+.tiktok-feed-wrap {
+  position: relative;
+}
+.tiktok-feed {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tiktok-feed::-webkit-scrollbar {
+  display: none;
+}
+.tiktok-feed-item {
+  flex: 0 0 auto;
+  width: 325px;
+  scroll-snap-align: start;
+}
+.tiktok-feed-item .tiktok-embed {
+  margin: 0;
+}
+.tiktok-feed-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1.3rem;
+  line-height: 1;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}
+.tiktok-feed-nav:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.tiktok-feed-prev { left: -1.4rem; }
+.tiktok-feed-next { right: -1.4rem; }
+@media (max-width: 900px) {
+  .tiktok-feed-nav { display: none; }
+}
+
+/* ==========================================================================
    Programs
    ========================================================================== */
 .programs-grid {
