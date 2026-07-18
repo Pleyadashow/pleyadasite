@@ -1,4 +1,38 @@
 User-agent: *
 Allow: /
 
+# --- AI crawlers: explicit allow (do not rely on default "*" silently) ---
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Google AI training / AI Overviews (separate from Googlebot search indexing)
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl (dataset used by many AI systems)
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://animatory.in.ua/sitemap.xml
