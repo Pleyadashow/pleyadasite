@@ -872,6 +872,12 @@ h1, h2, h3, h4 {
   overflow: hidden;
   aspect-ratio: 1 / 1;
   background: var(--line);
+  /* Below the two-column breakpoint, .article-card is a single implicit
+     grid column, so this would otherwise stretch to the card's full width. */
+  max-width: 200px;
+}
+@media (min-width: 780px) {
+  .article-thumb { max-width: none; }
 }
 .article-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .article-title {
