@@ -143,6 +143,17 @@
     tiktokNext?.addEventListener("click", () => scrollByCard(1));
   }
 
+  /* Show more / collapse for the photo gallery */
+  const galleryGrid = document.querySelector(".gallery-grid");
+  const galleryMoreBtn = document.getElementById("gallery-more-btn");
+  if (galleryGrid && galleryMoreBtn) {
+    galleryMoreBtn.addEventListener("click", () => {
+      const expanded = galleryGrid.classList.toggle("is-expanded");
+      galleryMoreBtn.textContent = expanded ? "Згорнути" : "Дивитись більше фото";
+      galleryMoreBtn.setAttribute("aria-expanded", String(expanded));
+    });
+  }
+
   /* Lightbox for the gallery */
   const lightbox = document.querySelector(".lightbox");
   if (lightbox) {
