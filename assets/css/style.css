@@ -180,6 +180,45 @@ h1, h2, h3, h4 {
 }
 .site-header.is-scrolled .header-cta:hover { border-color: var(--accent); color: var(--accent); }
 
+/* Solid header variant for pages with no hero image behind it */
+.site-header--solid {
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--line);
+}
+.site-header--solid .logo { color: var(--text); text-shadow: none; }
+.site-header--solid .header-cta {
+  border-color: color-mix(in srgb, var(--text) 25%, transparent);
+  color: var(--text);
+}
+.site-header--solid .header-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+.header-contact-links {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.site-nav {
+  display: none;
+  gap: 1.75rem;
+}
+@media (min-width: 640px) {
+  .site-nav { display: flex; }
+}
+.site-nav a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--dark-text);
+  text-shadow: 0 1px 12px rgba(0,0,0,.35);
+  transition: color var(--transition), text-shadow var(--transition);
+}
+.site-nav a:hover { color: var(--accent); }
+.site-header.is-scrolled .site-nav a,
+.site-header--solid .site-nav a {
+  color: var(--text);
+  text-shadow: none;
+}
+
 /* ==========================================================================
    Hero
    ========================================================================== */
@@ -813,6 +852,54 @@ h1, h2, h3, h4 {
   transition: border-color var(--transition), color var(--transition), transform var(--transition);
 }
 .social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* ==========================================================================
+   Articles (experience.html)
+   ========================================================================== */
+.articles-grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+}
+.article-card {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+}
+@media (min-width: 780px) {
+  .article-card { grid-template-columns: minmax(220px, 340px) 1fr; align-items: start; }
+}
+.article-thumb {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--line);
+}
+.article-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.article-title {
+  font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+  max-width: 30ch;
+}
+.article-meta {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--text) 55%, transparent);
+}
+.article-content { margin-top: 1.25rem; }
+.article-content p { margin-top: 1.1rem; }
+.article-content p:first-child { margin-top: 0; }
+.article-cta {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.article-cta p {
+  margin-bottom: 1rem;
+  color: color-mix(in srgb, var(--text) 78%, transparent);
+}
+.article-cta-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
 
 /* ==========================================================================
    Footer
