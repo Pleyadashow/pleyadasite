@@ -302,6 +302,54 @@ h1, h2, h3, h4 {
   gap: 0.9rem;
 }
 
+/* character teaser */
+.hero-characters {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem 1rem;
+  max-width: 46rem;
+}
+.character-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.character-chips li a {
+  display: inline-block;
+  font-size: 0.82rem;
+  padding: 0.32rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--dark-text);
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.character-chips li a:hover,
+.character-chips li a:focus-visible {
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+  border-color: var(--accent);
+}
+.character-more {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--dark-text) 80%, transparent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--dark-text) 45%, transparent);
+  padding-bottom: 0.1rem;
+}
+.character-more:hover,
+.character-more:focus-visible {
+  color: var(--dark-text);
+  border-color: var(--dark-text);
+}
+.character-more .arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.character-more:hover .arrow { transform: translateX(3px); }
+
 /* geography */
 .geo {
   margin-top: 2.75rem;
