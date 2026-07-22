@@ -104,12 +104,22 @@
     <nav class="site-nav">
       <a href="index.html#top">На головну</a>
     </nav>
-    <div class="header-contact-links">
-      <a href="https://t.me/Fetyushka" target="_blank" rel="noopener" class="btn btn--outline header-cta">Telegram</a>
-      <a href="https://ig.me/m/pleyadashow" target="_blank" rel="noopener" class="btn btn--outline header-cta">Instagram</a>
+    <div class="header-actions">
+      <div class="header-contact-links">
+        <a href="https://t.me/Fetyushka" target="_blank" rel="noopener" class="btn btn--outline header-cta">Telegram</a>
+        <a href="https://ig.me/m/pleyadashow" target="_blank" rel="noopener" class="btn btn--outline header-cta">Instagram</a>
+      </div>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="index.html#top">Головна</a>
+    <a href="experience.html">Деталі, які мають значення</a>
+  </nav>
 </header>
+<div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
 
 <main id="top">
 

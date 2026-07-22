@@ -165,9 +165,19 @@
     <nav class="site-nav">
       <a href="experience.html">Деталі, які мають значення</a>
     </nav>
-    <a href="#contact" class="btn btn--outline header-cta">Написати нам</a>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn--outline header-cta">Написати нам</a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="#top">Головна</a>
+    <a href="experience.html">Деталі, які мають значення</a>
+  </nav>
 </header>
+<div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
 
 <main id="top">
 
@@ -645,7 +655,6 @@
 <footer class="site-footer">
   <div class="container">
     <span>Pleyadashow — яскраві емоції, яскраві події!</span>
-    <a href="experience.html">Деталі, які мають значення</a>
     <a href="#contact">Написати нам</a>
   </div>
 </footer>
