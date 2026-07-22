@@ -25,6 +25,8 @@
       mobileMenu.setAttribute("aria-hidden", "true");
       mobileMenuBackdrop?.classList.remove("is-open");
       document.body.style.overflow = "";
+      mobileMenu.querySelectorAll(".mobile-submenu.is-open").forEach((sm) => sm.classList.remove("is-open"));
+      mobileMenu.querySelectorAll('.mobile-menu-caret[aria-expanded="true"]').forEach((c) => c.setAttribute("aria-expanded", "false"));
     };
     const openMenu = () => {
       menuToggle.classList.add("is-active");
@@ -39,6 +41,17 @@
     });
     mobileMenuBackdrop?.addEventListener("click", closeMenu);
     mobileMenu.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+
+    /* Accordion submenus (e.g. "Тематичні вечірки" — its own link + a
+       separate ▾ caret that expands/collapses the nested list) */
+    mobileMenu.querySelectorAll(".mobile-menu-caret").forEach((caret) => {
+      const submenu = document.getElementById(caret.getAttribute("aria-controls"));
+      if (!submenu) return;
+      caret.addEventListener("click", () => {
+        const isOpen = submenu.classList.toggle("is-open");
+        caret.setAttribute("aria-expanded", String(isOpen));
+      });
+    });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) closeMenu();
     });
