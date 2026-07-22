@@ -72,6 +72,11 @@ h1, h2, h3, h4 {
   color: var(--accent);
   margin-bottom: 0.9rem;
 }
+.eyebrow a {
+  color: inherit;
+  text-decoration: none;
+}
+.eyebrow a:hover { text-decoration: underline; }
 
 .section-title {
   font-size: clamp(1.75rem, 3.4vw, 2.75rem);
@@ -200,9 +205,10 @@ h1, h2, h3, h4 {
 
 .site-nav {
   display: none;
-  gap: 1.75rem;
+  align-items: center;
+  gap: 1.5rem;
 }
-@media (min-width: 640px) {
+@media (min-width: 880px) {
   .site-nav { display: flex; }
 }
 .site-nav a {
@@ -217,6 +223,91 @@ h1, h2, h3, h4 {
 .site-header--solid .site-nav a {
   color: var(--text);
   text-shadow: none;
+}
+
+/* "Тематичні вечірки" dropdown: hover on pointer devices, click on the
+   caret otherwise (mirrors the mobile accordion's link-vs-caret split) */
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+.nav-dropdown-caret {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.nav-dropdown-caret svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+  transition: transform var(--transition);
+}
+.nav-dropdown-caret[aria-expanded="true"] svg,
+.nav-dropdown:hover .nav-dropdown-caret svg {
+  transform: rotate(180deg);
+}
+/* The outer element's box starts flush at top:100% (zero gap) and its
+   padding-top stands in for the visual gap, so the cursor never leaves a
+   hoverable element while crossing from the trigger down to the panel —
+   that dead zone was what let mouseleave fire before the panel was reached. */
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 1.1rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition), visibility var(--transition);
+  z-index: 60;
+}
+.nav-dropdown-menu-inner {
+  min-width: 210px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 16px 32px rgba(0,0,0,.18);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(-6px);
+  transition: transform var(--transition);
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.nav-dropdown:hover .nav-dropdown-menu-inner,
+.nav-dropdown:focus-within .nav-dropdown-menu-inner,
+.nav-dropdown-menu.is-open .nav-dropdown-menu-inner {
+  transform: translateY(0);
+}
+/* Floating panel always sits on --bg, so its links need fixed dark text
+   regardless of the header's transparent/solid/scrolled color mode. */
+.nav-dropdown-menu-inner a {
+  padding: 0.65rem 0.9rem;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  color: var(--text) !important;
+  text-shadow: none !important;
+}
+.nav-dropdown-menu-inner a:hover {
+  background: color-mix(in srgb, var(--line) 55%, transparent);
+  color: var(--accent) !important;
 }
 
 /* ==========================================================================
@@ -241,7 +332,7 @@ h1, h2, h3, h4 {
   background: transparent;
   flex-shrink: 0;
 }
-@media (min-width: 640px) {
+@media (min-width: 880px) {
   .menu-toggle { display: none; }
 }
 .menu-toggle span {
@@ -296,7 +387,7 @@ h1, h2, h3, h4 {
 }
 .mobile-menu a:last-child { border-bottom: none; }
 .mobile-menu a:hover, .mobile-menu a:active { color: var(--accent); }
-@media (min-width: 640px) {
+@media (min-width: 880px) {
   .mobile-menu { display: none; }
 }
 
@@ -368,7 +459,7 @@ h1, h2, h3, h4 {
   transition: opacity var(--transition), visibility var(--transition);
 }
 .mobile-menu-backdrop.is-open { opacity: 1; visibility: visible; }
-@media (min-width: 640px) {
+@media (min-width: 880px) {
   .mobile-menu-backdrop { display: none; }
 }
 
@@ -1140,6 +1231,14 @@ h1, h2, h3, h4 {
   font-size: clamp(1rem, 1.3vw, 1.1rem);
   color: color-mix(in srgb, var(--text) 88%, transparent);
 }
+.paper-show-text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  text-underline-offset: 2px;
+  transition: text-decoration-color var(--transition);
+}
+.paper-show-text a:hover { text-decoration-color: var(--accent); }
 .video-preview-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1196,6 +1295,61 @@ h1, h2, h3, h4 {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+.video-unmute-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: color-mix(in srgb, var(--dark-bg) 55%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform var(--transition), background var(--transition);
+}
+.video-unmute-btn:hover,
+.video-unmute-btn:focus-visible {
+  background: var(--accent);
+  transform: scale(1.08);
+}
+.video-unmute-btn svg {
+  width: 19px;
+  height: 19px;
+  fill: #fff;
+}
+.video-unmute-btn .icon-unmuted { display: none; }
+.video-unmute-btn[aria-pressed="true"] .icon-muted { display: none; }
+.video-unmute-btn[aria-pressed="true"] .icon-unmuted { display: block; }
+
+/* ==========================================================================
+   Theme party teaser cards (hub page)
+   ========================================================================== */
+.theme-party-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  justify-items: center;
+  gap: var(--gap);
+  max-width: var(--container);
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+}
+.theme-party-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 325px;
+  text-align: center;
+}
+.theme-party-card .video-preview { margin-bottom: 1.1rem; }
+.theme-party-card-title {
+  font-size: 1.15rem;
+  margin-bottom: 1rem;
 }
 
 /* ==========================================================================

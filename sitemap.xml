@@ -18,6 +18,30 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://animatory.in.ua/tematychni-vechirky.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://animatory.in.ua/futbolna-vechirka.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://animatory.in.ua/disko-pati.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://animatory.in.ua/veduchi-vechirok.html</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://animatory.in.ua/llms.txt</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

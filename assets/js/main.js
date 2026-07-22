@@ -56,9 +56,54 @@
       if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) closeMenu();
     });
     window.addEventListener("resize", () => {
-      if (window.innerWidth >= 640 && mobileMenu.classList.contains("is-open")) closeMenu();
+      if (window.innerWidth >= 880 && mobileMenu.classList.contains("is-open")) closeMenu();
     });
   }
+
+  /* Desktop nav dropdown (e.g. "Тематичні вечірки"): opens instantly on
+     hover/focus of the whole trigger+panel container, and closes after a
+     short delay so a diagonal mouse path from the trigger into the panel
+     has time to land — without the delay, mouseleave could fire mid-transit
+     and yank the panel away before the click ever registers. The caret
+     click is the equivalent for touch/keyboard. */
+  document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
+    const caret = dropdown.querySelector(".nav-dropdown-caret");
+    const menu = dropdown.querySelector(".nav-dropdown-menu");
+    if (!caret || !menu) return;
+    let closeTimer = null;
+
+    const open = () => {
+      clearTimeout(closeTimer);
+      menu.classList.add("is-open");
+      caret.setAttribute("aria-expanded", "true");
+    };
+    const closeNow = () => {
+      clearTimeout(closeTimer);
+      menu.classList.remove("is-open");
+      caret.setAttribute("aria-expanded", "false");
+    };
+    const scheduleClose = () => {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(closeNow, 150);
+    };
+
+    dropdown.addEventListener("mouseenter", open);
+    dropdown.addEventListener("mouseleave", scheduleClose);
+    dropdown.addEventListener("focusin", open);
+    dropdown.addEventListener("focusout", (e) => {
+      if (!dropdown.contains(e.relatedTarget)) scheduleClose();
+    });
+    caret.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (menu.classList.contains("is-open")) closeNow(); else open();
+    });
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) closeNow();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeNow();
+    });
+  });
 
   /* Back-to-top button visibility */
   const backToTop = document.querySelector(".back-to-top");
@@ -196,6 +241,17 @@
       video.setAttribute("controls", "");
       attemptPlay();
     });
+
+    // Videos with an audio track (theme-party pages) start muted regardless
+    // of the source file — this button is the only way to turn sound on.
+    const unmuteBtn = preview.querySelector(".video-unmute-btn");
+    if (unmuteBtn) {
+      unmuteBtn.addEventListener("click", () => {
+        video.muted = !video.muted;
+        unmuteBtn.setAttribute("aria-pressed", String(!video.muted));
+        unmuteBtn.setAttribute("aria-label", video.muted ? "Увімкнути звук" : "Вимкнути звук");
+      });
+    }
   });
 
   /* TikTok feed prev/next scroll buttons */
