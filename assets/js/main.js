@@ -164,6 +164,27 @@
     }
   }
 
+  /* Click-to-play local video previews (paperove-shou.html): poster shows
+     immediately, the actual file only loads once the user presses play. */
+  const videoPreviews = document.querySelectorAll(".video-preview");
+  videoPreviews.forEach((preview) => {
+    const video = preview.querySelector("video");
+    const playBtn = preview.querySelector(".video-play-btn");
+    if (!video || !playBtn) return;
+
+    // With preload="none", play() called before any data is buffered fires
+    // an immediate "pause" while the browser fetches — it doesn't resume on
+    // its own once ready, so re-attempt once "canplay" confirms it can.
+    const attemptPlay = () => { if (video.paused) video.play().catch(() => {}); };
+    video.addEventListener("canplay", attemptPlay);
+
+    playBtn.addEventListener("click", () => {
+      preview.classList.add("is-playing");
+      video.setAttribute("controls", "");
+      attemptPlay();
+    });
+  });
+
   /* TikTok feed prev/next scroll buttons */
   const tiktokPrev = document.querySelector(".tiktok-feed-prev");
   const tiktokNext = document.querySelector(".tiktok-feed-next");
