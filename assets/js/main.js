@@ -167,61 +167,6 @@
     videos.forEach((v) => vio.observe(v));
   }
 
-  /* TikTok embed script: inject only once the feed nears the viewport */
-  const tiktokFeed = document.querySelector("[data-tiktok-lazy]");
-  if (tiktokFeed) {
-    const loadTikTokEmbed = () => {
-      if (document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) return;
-      /* TikTok's embed player reads its UI language from navigator.language
-         (it ignores any blockquote attribute) — override it only for the
-         duration of the embed script's DOM work, then restore it. Using
-         navigator.language instead of the page URL keeps this invisible to
-         GA4 pageview tracking and the canonical tag, since neither reacts
-         to navigator.language changes. */
-      let restored = false;
-      let languageOverridden = false;
-      try {
-        Object.defineProperty(window.navigator, "language", { value: "uk-UA", configurable: true });
-        languageOverridden = true;
-      } catch (e) { /* some browsers may refuse; TikTok just falls back to the real browser language */ }
-
-      const restoreLanguage = () => {
-        if (restored) return;
-        restored = true;
-        observer.disconnect();
-        clearTimeout(safetyTimer);
-        if (languageOverridden) delete window.navigator.language;
-      };
-
-      const items = tiktokFeed.querySelectorAll(".tiktok-feed-item");
-      const observer = new MutationObserver(() => {
-        const converted = tiktokFeed.querySelectorAll(".tiktok-feed-item iframe").length;
-        if (converted >= items.length) restoreLanguage();
-      });
-      observer.observe(tiktokFeed, { childList: true, subtree: true });
-      // Safety net only, in case some card never finishes converting (blocked script, deleted video, etc.)
-      const safetyTimer = setTimeout(restoreLanguage, 20000);
-
-      const script = document.createElement("script");
-      script.src = "https://www.tiktok.com/embed.js";
-      script.async = true;
-      document.body.appendChild(script);
-    };
-    if ("IntersectionObserver" in window) {
-      const tio = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            loadTikTokEmbed();
-            tio.disconnect();
-          }
-        });
-      }, { rootMargin: "300px 0px" });
-      tio.observe(tiktokFeed);
-    } else {
-      loadTikTokEmbed();
-    }
-  }
-
   /* Click-to-play local video previews (paperove-shou.html): poster shows
      immediately, the actual file only loads once the user presses play. */
   const videoPreviews = document.querySelectorAll(".video-preview");
@@ -254,17 +199,19 @@
     }
   });
 
-  /* TikTok feed prev/next scroll buttons */
-  const tiktokPrev = document.querySelector(".tiktok-feed-prev");
-  const tiktokNext = document.querySelector(".tiktok-feed-next");
-  if (tiktokFeed && (tiktokPrev || tiktokNext)) {
-    const scrollByCard = (dir) => {
-      const card = tiktokFeed.querySelector(".tiktok-feed-item");
-      const step = card ? card.getBoundingClientRect().width + 16 : 340;
-      tiktokFeed.scrollBy({ left: dir * step, behavior: "smooth" });
-    };
-    tiktokPrev?.addEventListener("click", () => scrollByCard(-1));
-    tiktokNext?.addEventListener("click", () => scrollByCard(1));
+  /* Show more / collapse for "Моменти зі свят" (mirrors the mobile-menu
+     accordion: grid-template-rows 0fr/1fr transition on .moments-more,
+     driven by an .is-open class toggle) */
+  const momentsMoreBtn = document.getElementById("moments-more-btn");
+  const momentsMore = document.getElementById("moments-more");
+  const momentsGrid = document.querySelector(".moments-grid");
+  if (momentsMoreBtn && momentsMore && momentsGrid) {
+    momentsMoreBtn.addEventListener("click", () => {
+      const isOpen = momentsMore.classList.toggle("is-open");
+      momentsGrid.classList.toggle("is-expanded", isOpen);
+      momentsMoreBtn.textContent = isOpen ? "Згорнути" : "Показати більше";
+      momentsMoreBtn.setAttribute("aria-expanded", String(isOpen));
+    });
   }
 
   /* Show more / collapse for the photo gallery */

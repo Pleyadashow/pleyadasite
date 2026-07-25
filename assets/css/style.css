@@ -789,54 +789,35 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
-   TikTok feed
+   Moments from parties (local video grid + show-more accordion)
    ========================================================================== */
-.tiktok-feed-wrap {
-  position: relative;
+.moments-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: var(--gap);
+  max-width: var(--container);
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
 }
-.tiktok-feed {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+@media (min-width: 640px) {
+  .moments-grid { grid-template-columns: repeat(3, 1fr); }
 }
-.tiktok-feed::-webkit-scrollbar {
-  display: none;
+.moments-item--mobile-extra { display: none; }
+@media (min-width: 640px) {
+  .moments-item--mobile-extra { display: block; }
 }
-.tiktok-feed-item {
-  flex: 0 0 auto;
-  width: 325px;
-  scroll-snap-align: start;
+.moments-grid.is-expanded .moments-item--mobile-extra { display: block; }
+
+.moments-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(.22,.61,.36,1);
 }
-.tiktok-feed-item .tiktok-embed {
-  margin: 0;
-}
-.tiktok-feed-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--bg);
-  color: var(--text);
-  font-size: 1.3rem;
-  line-height: 1;
-  z-index: 2;
-  box-shadow: 0 4px 16px rgba(0,0,0,.12);
-}
-.tiktok-feed-nav:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.tiktok-feed-prev { left: -1.4rem; }
-.tiktok-feed-next { right: -1.4rem; }
-@media (max-width: 900px) {
-  .tiktok-feed-nav { display: none; }
+.moments-more.is-open { grid-template-rows: 1fr; }
+.moments-more-inner { overflow: hidden; }
+.moments-more .moments-grid { grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+  .moments-more .moments-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ==========================================================================
