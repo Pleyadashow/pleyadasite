@@ -8,3 +8,12 @@
 .claude/
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+
+# Secrets / local config (preventive — none tracked yet)
+.env
+.env.*
+*.pem
+*.key
+config.local.*
