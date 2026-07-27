@@ -166,7 +166,19 @@
     <nav class="site-nav">
       <a href="#top">Головна</a>
       <a href="experience.html">Деталі, які мають значення</a>
-      <a href="paperove-shou.html">Паперове шоу</a>
+      <div class="nav-dropdown">
+        <a href="shou-programy.html">Шоу-програми</a>
+        <button type="button" class="nav-dropdown-caret" aria-expanded="false" aria-controls="nav-submenu-shows" aria-label="Розгорнути підменю «Шоу-програми»">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+        <div class="nav-dropdown-menu" id="nav-submenu-shows">
+          <div class="nav-dropdown-menu-inner">
+            <a href="paperove-shou.html">Паперове шоу</a>
+            <a href="bulbashkove-shou.html">Бульбашкове шоу</a>
+            <a href="vognyana-bulbashka.html">Вогняна бульбашка</a>
+          </div>
+        </div>
+      </div>
       <div class="nav-dropdown">
         <a href="tematychni-vechirky.html">Тематичні вечірки</a>
         <button type="button" class="nav-dropdown-caret" aria-expanded="false" aria-controls="nav-submenu-parties" aria-label="Розгорнути підменю «Тематичні вечірки»">
@@ -191,7 +203,21 @@
   <nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <a href="#top">Головна</a>
     <a href="experience.html">Деталі, які мають значення</a>
-    <a href="paperove-shou.html">Паперове шоу</a>
+    <div class="mobile-menu-item">
+      <div class="mobile-menu-row">
+        <a href="shou-programy.html" class="mobile-menu-link">Шоу-програми</a>
+        <button type="button" class="mobile-menu-caret" aria-expanded="false" aria-controls="mobile-submenu-shows" aria-label="Розгорнути підменю «Шоу-програми»">
+          <span class="mobile-menu-caret-icon" aria-hidden="true">▾</span>
+        </button>
+      </div>
+      <div class="mobile-submenu" id="mobile-submenu-shows">
+        <div class="mobile-submenu-inner">
+          <a href="paperove-shou.html">Паперове шоу</a>
+          <a href="bulbashkove-shou.html">Бульбашкове шоу</a>
+          <a href="vognyana-bulbashka.html">Вогняна бульбашка</a>
+        </div>
+      </div>
+    </div>
     <div class="mobile-menu-item">
       <div class="mobile-menu-row">
         <a href="tematychni-vechirky.html" class="mobile-menu-link">Тематичні вечірки</a>
@@ -445,9 +471,9 @@
         <div class="program-card" data-reveal>
           <h3>Спецефекти</h3>
           <ul>
-            <li>Вогняні бульбашки</li>
-            <li>Людина в бульбашці</li>
-            <li>Шоу мильних бульбашок</li>
+            <li><a href="vognyana-bulbashka.html">Вогняні бульбашки</a></li>
+            <li><a href="bulbashkove-shou.html">Людина в бульбашці</a></li>
+            <li><a href="bulbashkove-shou.html">Шоу мильних бульбашок</a></li>
             <li><a href="paperove-shou.html">Паперове шоу</a></li>
           </ul>
         </div>
